@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { SQLite } from '@ionic-native/sqlite'
 import { DatabaseProvider } from '../providers/database/database';
 import { ProductProvider } from '../providers/product/product';
+import { CategoryProvider } from '../providers/category/category';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ProductProvider } from '../providers/product/product';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
     DatabaseProvider,
-    ProductProvider
+    ProductProvider,
+    CategoryProvider
   ]
 })
 export class AppModule {}

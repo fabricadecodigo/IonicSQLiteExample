@@ -71,7 +71,7 @@ export class ProductProvider {
       .catch((e) => console.error(e));
   }
 
-  public getAll(name: string) {
+  public getAll(name: string = null) {
     return this.dbProvider.getDB()
     .then((db: SQLiteObject) => {
       let sql = 'select * from products';
