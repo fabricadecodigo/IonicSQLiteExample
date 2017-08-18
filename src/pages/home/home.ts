@@ -7,13 +7,19 @@ import { ProductProvider, Product } from '../../providers/product/product'
   templateUrl: 'home.html'
 })
 export class HomePage {
-  products: any[];
+  products: any[] = [];
+  onlyInactives: boolean = false;
+  searchText: string = null;
 
   constructor(public navCtrl: NavController, private toast: ToastController, private productProvider: ProductProvider) { }
 
   ionViewDidEnter() {
-    this.productProvider.getAll()
-      .then((result) => {
+    this.getAllProducts();
+  }
+
+  getAllProducts() {
+    this.productProvider.getAll(!this.onlyInactives, this.searchText)
+      .then((result: any[]) => {
         this.products = result;
       });
   }
@@ -34,6 +40,10 @@ export class HomePage {
         this.products.splice(index, 1);
         this.toast.create({ message: 'Produto removido.', duration: 3000, position: 'botton' }).present();
       })
+  }
+
+  filterProducts(ev: any) {
+    this.getAllProducts();
   }
 
 }

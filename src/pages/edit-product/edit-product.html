@@ -22,12 +22,12 @@
 
       <ion-item>
         <ion-label stacked>Vencimento</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" name="birth" [(ngModel)]="model.duedate"></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" name="duedate" min="2017" max="2020-12-31" [(ngModel)]="model.duedate"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label stacked>Categoria</ion-label>
-        <ion-select [(ngModel)]="model.category_id">
+        <ion-select name="category_id" [(ngModel)]="model.category_id">
           <ion-option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name}}</ion-option>
         </ion-select>
       </ion-item>

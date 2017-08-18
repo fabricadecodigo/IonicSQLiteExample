@@ -7,17 +7,41 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-searchbar (ionInput)="filterProducts($event)" [(ngModel)]="searchText"></ion-searchbar>
   <ion-list>
-    <ion-item *ngFor="let product of products">
-      <ion-row>
-        <ion-col col-8>
-          <h1>{{ product.name }}</h1>
-          <h2>{{ product.duedate }}</h2>
-        </ion-col>
-        <ion-col col-4>
-          <p>{{ product.price }}</p>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+    <ion-item-sliding *ngFor="let product of products">
+
+      <button ion-item (click)="editProduct(product.id)">
+        <h1>{{ product.name }}</h1>
+        <h2>{{ product.category_name }}</h2>
+        <h2>{{ product.duedate | date:'dd/MM/yyyy' }}</h2>
+        <h2 class="price">{{ product.price | currency:'BRL':true }}</h2>
+      </button>
+
+      <ion-item-options side="left">
+        <button ion-button color="danger" (click)="removeProduct(product)">
+          <ion-icon name="trash"></ion-icon>
+          Excluir
+        </button>
+      </ion-item-options>
+
+    </ion-item-sliding>
   </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="addProduct()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <p>Total: {{ products.length }}</p>
+    <ion-list>
+      <ion-item no-lines>
+        <ion-label>Listar inativos</ion-label>
+        <ion-toggle name="listarInativos" [(ngModel)]="onlyInactives" (ionChange)="getAllProducts()"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-toolbar>
+</ion-footer>

@@ -32,7 +32,7 @@ export class EditProductPage {
    */
   ionViewDidLoad() {
     this.categoryProvider.getAll()
-      .then((result: any) => {
+      .then((result: any[]) => {
         this.categories = result;
       })
       .catch(() => {

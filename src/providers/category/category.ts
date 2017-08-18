@@ -13,7 +13,16 @@ export class CategoryProvider {
 
       return db.executeSql('select * from categories', [])
         .then((data: any) => {
-          return data.rows;
+          if (data.rows.length > 0) {
+            let categories: any[] = [];
+            for (var i = 0; i < data.rows.length; i++) {
+              var category = data.rows.item(i);
+              categories.push(category);
+            }
+            return categories;
+          } else {
+            return [];
+          }
         })
         .catch((e) => console.error(e));
     })

@@ -52,10 +52,10 @@ export class DatabaseProvider {
    * @param db
    */
   private insertDefaultItems(db: SQLiteObject) {
-    db.executeSql('select COUNT(id) as Qtd from categories', {})
+    db.executeSql('select COUNT(id) as qtd from categories', {})
     .then((data: any) => {
       //Se não existe nenhum registro
-      if (data.rows.length == 0) {
+      if (data.rows.item(0).qtd == 0) {
 
         // Criando as tabelas
         db.sqlBatch([
@@ -70,5 +70,4 @@ export class DatabaseProvider {
     })
     .catch(e => console.error('Erro ao consultar a qtd de categorias', e));
   }
-
 }

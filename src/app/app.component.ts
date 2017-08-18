@@ -9,7 +9,7 @@ import { DatabaseProvider } from '../providers/database/database'
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage: any = null;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, dbProvider: DatabaseProvider) {
     platform.ready().then(() => {
@@ -19,9 +19,20 @@ export class MyApp {
 
       //Criando o banco de dados
       dbProvider.createDatabase()
-        .then(() => splashScreen.hide()) // fechando a SplashScreen somente quando o banco for criado
-        .catch(() => splashScreen.hide()); // ou se houver erro na criação do banco
+        .then(() => {
+          // fechando a SplashScreen somente quando o banco for criado
+          this.openHomePage(splashScreen);
+        })
+        .catch(() => {
+          // ou se houver erro na criação do banco
+          this.openHomePage(splashScreen);
+        });
     });
+  }
+
+  private openHomePage(splashScreen: SplashScreen) {
+    splashScreen.hide();
+    this.rootPage = HomePage;
   }
 }
 
