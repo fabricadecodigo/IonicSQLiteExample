@@ -29,7 +29,8 @@ import { CategoryProvider } from '../providers/category/category';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: LOCALE_ID, useValue: 'pt-BR'}, // Grande sacada para formatar numeros e datas
+    // Grande sacada para formatar numeros e datas no formato brasileiro
+    {provide: LOCALE_ID, useValue: 'pt-BR'},
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SQLite,
     DatabaseProvider,
