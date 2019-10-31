@@ -12,7 +12,7 @@
   
   <ion-list>
     <ion-item-sliding *ngFor="let contact of contacts">
-      <ion-item detail [routerLink]="['detail', contact.id]">
+      <ion-item>
         <ion-label>{{contact.name}}</ion-label>
       </ion-item>
 
