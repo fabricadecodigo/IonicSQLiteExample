@@ -9,7 +9,6 @@ import { ToastController, AlertController } from '@ionic/angular';
   styleUrls: ['./contact-list.page.scss'],
 })
 export class ContactListPage implements OnInit {
-  showSearch: boolean = false;
   contacts: Contact[] = [];
 
   constructor(
@@ -28,20 +27,15 @@ export class ContactListPage implements OnInit {
     this.contacts = await this.contactService.getAll();
   }
 
-  searchButtonClick() {
-    this.showSearch = true;
-  }
-
-  doSerchBarCancel() {
-    this.showSearch = false;
-    this.loadContacts();
-  }
-
   async doSerchBarChange($event: any) {
     const value = $event.target.value;
     if (value && value.length >= 2) {
       this.contacts = await this.contactService.filter(value);
     }
+  }
+
+  doSerchClear() {
+    this.loadContacts();
   }
 
   async delete(contact: Contact) {

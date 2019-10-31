@@ -8,16 +8,13 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()">
     <ion-item>
       <ion-label position="stacked">Nome</ion-label>
-      <ion-input autocapitalize="on" [(ngModel)]="contact.name" name="name" #name="ngModel" required></ion-input>
-    </ion-item>
-    <ion-item lines="none" *ngIf="name.invalid && (name.dirty || name.touched)">
-      <ion-label *ngIf="name?.errors.required" color="danger">O campo é obrigatório</ion-label>
+      <ion-input autocapitalize="on" [(ngModel)]="contact.name" name="name"></ion-input>
     </ion-item>
     <div class="ion-margin-vertical">
-      <ion-button type="submit" color="secondary" expand="block" [disabled]="!contactForm.form.valid">Salvar</ion-button>
+      <ion-button type="submit" color="secondary" expand="block">Salvar</ion-button>
     </div>
   </form>
 </ion-content>

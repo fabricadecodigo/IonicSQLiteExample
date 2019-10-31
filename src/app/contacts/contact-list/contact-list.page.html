@@ -1,22 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title *ngIf="!showSearch">Contatos</ion-title>
-    
-    <ion-buttons slot="primary" *ngIf="!showSearch">
-      <ion-button (click)="searchButtonClick()">
-        <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    
-    <ion-searchbar placeholder="Pesquisar" *ngIf="showSearch" showCancelButton="true" 
-      (ionCancel)="doSerchBarCancel()"
-      (ionChange)="doSerchBarChange($event)">
-    </ion-searchbar>
-
+    <ion-title>Contatos</ion-title>    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar placeholder="Pesquisar" 
+    (ionClear)="doSerchClear()"
+    (ionChange)="doSerchBarChange($event)">
+  </ion-searchbar>
+  
   <ion-list>
     <ion-item-sliding *ngFor="let contact of contacts">
       <ion-item detail [routerLink]="['detail', contact.id]">
