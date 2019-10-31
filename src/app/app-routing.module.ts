@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
-  { path: 'contact-list', loadChildren: './contacts/contact-list/contact-list.module#ContactListPageModule' },
-  { path: 'contact-form', loadChildren: './contacts/contact-form/contact-form.module#ContactFormPageModule' },
+  { path: '', redirectTo: 'contacts', pathMatch: 'full' },
+  { path: 'contacts', loadChildren: './contacts/contact-list/contact-list.module#ContactListPageModule' },
+  { path: 'contacts/new', loadChildren: './contacts/contact-form/contact-form.module#ContactFormPageModule' },
+  { path: 'contacts/edit/:id', loadChildren: './contacts/contact-form/contact-form.module#ContactFormPageModule' },
 ];
 
 @NgModule({

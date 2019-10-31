@@ -1,9 +1,23 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>contact-form</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="ion-padding">
+  <form #contactForm="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input autocapitalize="on" [(ngModel)]="contact.name" name="name" #name="ngModel" required></ion-input>
+    </ion-item>
+    <ion-item lines="none" *ngIf="name.invalid && (name.dirty || name.touched)">
+      <ion-label *ngIf="name?.errors.required" color="danger">O campo é obrigatório</ion-label>
+    </ion-item>
+    <div class="ion-margin-vertical">
+      <ion-button type="submit" color="secondary" expand="block" [disabled]="!contactForm.form.valid">Salvar</ion-button>
+    </div>
+  </form>
 </ion-content>

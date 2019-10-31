@@ -1,9 +1,42 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>contact-list</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="!showSearch">Contatos</ion-title>
+    
+    <ion-buttons slot="primary" *ngIf="!showSearch">
+      <ion-button (click)="searchButtonClick()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-searchbar placeholder="Pesquisar" *ngIf="showSearch" showCancelButton="true" 
+      (ionCancel)="doSerchBarCancel()"
+      (ionChange)="doSerchBarChange($event)">
+    </ion-searchbar>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let contact of contacts">
+      <ion-item detail [routerLink]="['detail', contact.id]">
+        <ion-label>{{contact.name}}</ion-label>
+      </ion-item>
 
+      <ion-item-options side="start">
+        <ion-item-option [routerLink]="['edit', contact.id]">
+          <ion-icon slot="icon-only" name="create" color="secondary"></ion-icon>
+        </ion-item-option>
+        <ion-item-option (click)="delete(contact)">
+          <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" [routerLink]="['new']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
